@@ -1,0 +1,315 @@
+Label of SD or CH,Automatic Anatomical Labeling,Percentage
+S1,Temporal_Sup_R,0.0186
+,Temporal_Mid_R,0.9257
+,Temporal_Inf_R,0.0557
+,,
+S2,Frontal_Inf_Oper_R,0.0115
+,Frontal_Inf_Orb_R,0.3168
+,Temporal_Pole_Sup_R,0.6718
+,,
+S3,Frontal_Sup_R,0.0816
+,Frontal_Sup_Orb_R,0.4116
+,Frontal_Mid_R,0.0068
+,Frontal_Mid_Orb_R,0.5000
+,,
+S4,Frontal_Sup_L,0.0494
+,Frontal_Sup_Orb_L,0.1687
+,Frontal_Mid_Orb_L,0.7819
+,,
+S5,Temporal_Sup_L,0.0778
+,Temporal_Pole_Sup_L,0.5667
+,Temporal_Mid_L,0.2556
+,Temporal_Pole_Mid_L,0.1000
+,,
+S6,Temporal_Mid_L,0.7003
+,Temporal_Inf_L,0.2997
+,,
+S7,Precentral_R,0.1741
+,Frontal_Inf_Oper_R,0.0032
+,Rolandic_Oper_R,0.4557
+,Postcentral_R,0.2911
+,Heschl_R,0.0158
+,Temporal_Sup_R,0.0601
+,,
+S8,Frontal_Mid_R,0.7926
+,Frontal_Inf_Tri_R,0.2074
+,,
+S9,Frontal_Sup_L,0.0174
+,Frontal_Sup_Medial_L,0.6725
+,Frontal_Sup_Medial_R,0.3101
+,,
+S10,Frontal_Mid_L,0.2937
+,Frontal_Inf_Tri_L,0.7063
+,,
+S11,Rolandic_Oper_L,0.0921
+,Postcentral_L,0.3388
+,Heschl_L,0.0263
+,Temporal_Sup_L,0.4901
+,Temporal_Mid_L,0.0526
+,,
+S12,Precentral_R,0.0116
+,Frontal_Mid_R,0.4363
+,Frontal_Inf_Oper_R,0.4324
+,Frontal_Inf_Tri_R,0.1197
+,,
+S13,Frontal_Sup_R,0.4579
+,Frontal_Mid_R,0.5421
+,,
+S14,Frontal_Sup_L,0.6462
+,Frontal_Mid_L,0.3538
+,,
+S15,Precentral_L,0.3769
+,Frontal_Mid_L,0.2425
+,Frontal_Inf_Oper_L,0.1940
+,Frontal_Inf_Tri_L,0.1866
+,,
+D1,Temporal_Sup_R,0.3870
+,Temporal_Pole_Sup_R,0.2192
+,Temporal_Mid_R,0.3288
+,Temporal_Pole_Mid_R,0.0651
+,,
+D2,Frontal_Mid_R,0.0154
+,Frontal_Mid_Orb_R,0.5405
+,Frontal_Inf_Tri_R,0.0579
+,Frontal_Inf_Orb_R,0.3861
+,,
+D3,Frontal_Sup_Orb_L,0.1275
+,Frontal_Sup_Orb_R,0.0098
+,Frontal_Mid_Orb_L,0.4379
+,Frontal_Mid_Orb_R,0.2288
+,Rectus_L,0.1732
+,Rectus_R,0.0229
+,,
+D4,Frontal_Mid_Orb_L,0.0338
+,Frontal_Inf_Orb_L,0.9662
+,,
+D5,Temporal_Mid_L,1.0000
+,,
+D6,Rolandic_Oper_R,0.0220
+,Postcentral_R,0.0157
+,SupraMarginal_R,0.1950
+,Temporal_Sup_R,0.7673
+,,
+D7,Frontal_Inf_Oper_R,0.1899
+,Frontal_Inf_Tri_R,0.8101
+,,
+D8,Frontal_Sup_R,0.8327
+,Frontal_Mid_R,0.1673
+,,
+D9,Frontal_Sup_L,0.7810
+,Frontal_Mid_L,0.2190
+,,
+D10,Frontal_Inf_Oper_L,0.5816
+,Frontal_Inf_Tri_L,0.3027
+,Rolandic_Oper_L,0.1020
+,Temporal_Pole_Sup_L,0.0136
+,,
+D11,SupraMarginal_L,0.0721
+,Temporal_Sup_L,0.4590
+,Temporal_Mid_L,0.4689
+,,
+D12,Precentral_R,0.5115
+,Postcentral_R,0.4885
+,,
+D13,Frontal_Mid_R,0.9856
+,Frontal_Inf_Tri_R,0.0144
+,,
+D14,Frontal_Sup_L,0.0078
+,Frontal_Sup_Medial_L,0.5875
+,Frontal_Sup_Medial_R,0.4047
+,,
+D15,Frontal_Mid_L,0.9636
+,Frontal_Inf_Tri_L,0.0364
+,,
+D16,Postcentral_L,0.9350
+,SupraMarginal_L,0.0650
+,,
+ CH1 (S1-D1),Temporal_Sup_R,0.3135
+,Temporal_Mid_R,0.6865
+,,
+ CH2 (S1-D6),Temporal_Sup_R,0.6304
+,Temporal_Mid_R,0.3696
+,,
+ CH3 (S2-D1),Rolandic_Oper_R,0.0036
+,Temporal_Sup_R,0.0108
+,Temporal_Pole_Sup_R,0.7993
+,Temporal_Pole_Mid_R,0.1864
+,,
+ CH4 (S2-D2),Frontal_Mid_Orb_R,0.0275
+,Frontal_Inf_Tri_R,0.0481
+,Frontal_Inf_Orb_R,0.9244
+,,
+ CH5 (S2-D7),Frontal_Inf_Oper_R,0.1140
+,Frontal_Inf_Tri_R,0.5603
+,Frontal_Inf_Orb_R,0.3127
+,Temporal_Pole_Sup_R,0.0130
+,,
+ CH6 (S3-D2),Frontal_Sup_Orb_R,0.0615
+,Frontal_Mid_R,0.0205
+,Frontal_Mid_Orb_R,0.9180
+,,
+ CH7 (S3-D3),Frontal_Sup_R,0.0619
+,Frontal_Sup_Orb_R,0.5244
+,Frontal_Mid_Orb_R,0.1205
+,Frontal_Sup_Medial_R,0.0065
+,Frontal_Mid_Orb_R,0.2866
+,,
+ CH8 (S3-D8),Frontal_Sup_R,0.4486
+,Frontal_Sup_Orb_R,0.2911
+,Frontal_Mid_R,0.1918
+,Frontal_Mid_Orb_R,0.0685
+,,
+ CH9 (S4-D3),Frontal_Sup_L,0.0147
+,Frontal_Sup_Orb_L,0.7363
+,Frontal_Mid_Orb_L,0.1758
+,Frontal_Mid_Orb_L,0.0733
+,,
+ CH10 (S4-D4),Frontal_Mid_Orb_L,0.7376
+,Frontal_Inf_Orb_L,0.2624
+,,
+ CH11 (S4-D9),Frontal_Sup_L,0.4628
+,Frontal_Sup_Orb_L,0.2196
+,Frontal_Mid_L,0.0811
+,Frontal_Mid_Orb_L,0.2365
+,,
+ CH12 (S5-D4),Frontal_Inf_Orb_L,0.3767
+,Temporal_Pole_Sup_L,0.6164
+,Temporal_Pole_Mid_L,0.0068
+,,
+ CH13 (S5-D5),Temporal_Sup_L,0.2143
+,Temporal_Pole_Sup_L,0.0034
+,Temporal_Mid_L,0.7823
+,,
+ CH14 (S5-D10),Frontal_Inf_Oper_L,0.0922
+,Frontal_Inf_Tri_L,0.1195
+,Frontal_Inf_Orb_L,0.0307
+,Rolandic_Oper_L,0.0922
+,Temporal_Sup_L,0.1297
+,Temporal_Pole_Sup_L,0.5358
+,,
+ CH15 (S6-D5),Temporal_Mid_L,0.8267
+,Temporal_Inf_L,0.1733
+,,
+ CH16 (S6-D11),Temporal_Mid_L,1.0000
+,,
+ CH17 (S7-D1),Rolandic_Oper_R,0.2034
+,Heschl_R,0.0169
+,Temporal_Sup_R,0.5525
+,Temporal_Pole_Sup_R,0.2271
+,,
+ CH18 (S7-D6),Rolandic_Oper_R,0.1352
+,Postcentral_R,0.4403
+,SupraMarginal_R,0.0220
+,Heschl_R,0.0031
+,Temporal_Sup_R,0.3994
+,,
+ CH19 (S7-D7),Precentral_R,0.1286
+,Frontal_Inf_Oper_R,0.4405
+,Frontal_Inf_Tri_R,0.0579
+,Rolandic_Oper_R,0.3473
+,Temporal_Sup_R,0.0032
+,Temporal_Pole_Sup_R,0.0225
+,,
+ CH20 (S7-D12),Precentral_R,0.3642
+,Postcentral_R,0.6358
+,,
+ CH21 (S8-D2),Frontal_Mid_R,0.4457
+,Frontal_Mid_Orb_R,0.1558
+,Frontal_Inf_Tri_R,0.2645
+,Frontal_Inf_Orb_R,0.1341
+,,
+ CH22 (S8-D7),Frontal_Mid_R,0.1696
+,Frontal_Inf_Tri_R,0.8304
+,,
+ CH23 (S8-D8),Frontal_Sup_R,0.1451
+,Frontal_Mid_R,0.8549
+,,
+ CH24 (S8-D13),Frontal_Mid_R,0.8431
+,Frontal_Inf_Tri_R,0.1569
+,,
+ CH25 (S9-D3),Frontal_Sup_Orb_L,0.0096
+,Frontal_Sup_Medial_L,0.3312
+,Frontal_Sup_Medial_R,0.1286
+,Frontal_Mid_Orb_L,0.3923
+,Frontal_Mid_Orb_R,0.1383
+,,
+ CH26 (S9-D8),Frontal_Sup_R,0.4906
+,Frontal_Sup_Medial_R,0.5094
+,,
+ CH27 (S9-D9),Frontal_Sup_L,0.7987
+,Frontal_Sup_Medial_L,0.2013
+,,
+ CH28 (S9-D14),Frontal_Sup_Medial_L,0.6439
+,Frontal_Sup_Medial_R,0.3561
+,,
+ CH29 (S10-D4),Frontal_Mid_L,0.0547
+,Frontal_Mid_Orb_L,0.1679
+,Frontal_Inf_Tri_L,0.4051
+,Frontal_Inf_Orb_L,0.3723
+,,
+ CH30 (S10-D9),Frontal_Mid_L,1.0000
+,,
+ CH31 (S10-D10),Frontal_Inf_Tri_L,1.0000
+,,
+ CH32 (S10-D15),Frontal_Mid_L,0.6220
+,Frontal_Inf_Tri_L,0.3780
+,,
+ CH33 (S11-D5),Temporal_Sup_L,0.3244
+,Temporal_Mid_L,0.6756
+,,
+ CH34 (S11-D10),Frontal_Inf_Oper_L,0.2359
+,Rolandic_Oper_L,0.4120
+,Postcentral_L,0.1429
+,Heschl_L,0.0100
+,Temporal_Sup_L,0.1927
+,Temporal_Pole_Sup_L,0.0066
+,,
+ CH35 (S11-D11),Postcentral_L,0.0767
+,SupraMarginal_L,0.0933
+,Temporal_Sup_L,0.4967
+,Temporal_Mid_L,0.3333
+,,
+ CH36 (S11-D16),Postcentral_L,1.0000
+,,
+ CH37 (S12-D7),Frontal_Mid_R,0.0102
+,Frontal_Inf_Oper_R,0.2901
+,Frontal_Inf_Tri_R,0.6997
+,,
+ CH38 (S12-D12),Precentral_R,0.7558
+,Frontal_Mid_R,0.0659
+,Frontal_Inf_Oper_R,0.1667
+,Postcentral_R,0.0116
+,,
+ CH39 (S12-D13),Frontal_Mid_R,0.7323
+,Frontal_Inf_Oper_R,0.0945
+,Frontal_Inf_Tri_R,0.1732
+,,
+ CH40 (S13-D8),Frontal_Sup_R,0.3115
+,Frontal_Mid_R,0.6885
+,,
+ CH41 (S13-D13),Frontal_Sup_R,0.0240
+,Frontal_Mid_R,0.9760
+,,
+ CH42 (S13-D14),Frontal_Sup_R,0.6345
+,Frontal_Sup_Medial_R,0.3655
+,,
+ CH43 (S14-D9),Frontal_Sup_L,0.6926
+,Frontal_Mid_L,0.3074
+,,
+ CH44 (S14-D14),Frontal_Sup_L,0.6352
+,Frontal_Sup_Medial_L,0.3648
+,,
+ CH45 (S14-D15),Frontal_Sup_L,0.1628
+,Frontal_Mid_L,0.8372
+,,
+ CH46 (S15-D10),Precentral_L,0.1014
+,Frontal_Inf_Oper_L,0.5035
+,Frontal_Inf_Tri_L,0.3951
+,,
+ CH47 (S15-D15),Frontal_Mid_L,0.5581
+,Frontal_Inf_Oper_L,0.1124
+,Frontal_Inf_Tri_L,0.3295
+,,
+ CH48 (S15-D16),Precentral_L,0.5530
+,Postcentral_L,0.4470
+,,

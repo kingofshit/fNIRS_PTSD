@@ -1,0 +1,297 @@
+Label of SD or CH,Brodmann Area (Chris rorden' MRIcro),Percentage
+S1,20 - Inferior Temporal gyrus,0.1115
+,21 - Middle Temporal gyrus,0.8885
+,,
+S2,38 - Temporopolar area,1.0000
+,,
+S3,10 - Frontopolar area,0.1020
+,11 - Orbitofrontal area,0.7857
+,47 - Inferior prefrontal gyrus,0.1122
+,,
+S4,10 - Frontopolar area,0.1317
+,11 - Orbitofrontal area,0.6749
+,46 - Dorsolateral prefrontal cortex,0.0329
+,47 - Inferior prefrontal gyrus,0.1605
+,,
+S5,21 - Middle Temporal gyrus,0.2815
+,38 - Temporopolar area,0.7185
+,,
+S6,20 - Inferior Temporal gyrus,0.6026
+,21 - Middle Temporal gyrus,0.3974
+,,
+S7,6 - Pre-Motor and Supplementary Motor Cortex,0.4051
+,22 - Superior Temporal Gyrus,0.0443
+,43 - Subcentral area,0.2816
+,48 - Retrosubicular area,0.2690
+,,
+S8,45 - pars triangularis Broca's area,0.4259
+,46 - Dorsolateral prefrontal cortex,0.5741
+,,
+S9,10 - Frontopolar area,1.0000
+,,
+S10,45 - pars triangularis Broca's area,0.5985
+,46 - Dorsolateral prefrontal cortex,0.4015
+,,
+S11,22 - Superior Temporal Gyrus,0.7270
+,43 - Subcentral area,0.1414
+,48 - Retrosubicular area,0.1316
+,,
+S12,9 - Dorsolateral prefrontal cortex,0.0425
+,44 - pars opercularis_ part of Broca's area,0.7799
+,45 - pars triangularis Broca's area,0.1776
+,,
+S13,9 - Dorsolateral prefrontal cortex,0.5093
+,10 - Frontopolar area,0.0047
+,46 - Dorsolateral prefrontal cortex,0.4860
+,,
+S14,9 - Dorsolateral prefrontal cortex,0.6368
+,46 - Dorsolateral prefrontal cortex,0.3632
+,,
+S15,6 - Pre-Motor and Supplementary Motor Cortex,0.1978
+,9 - Dorsolateral prefrontal cortex,0.0149
+,44 - pars opercularis_ part of Broca's area,0.7873
+,,
+D1,21 - Middle Temporal gyrus,0.8356
+,38 - Temporopolar area,0.1164
+,48 - Retrosubicular area,0.0479
+,,
+D2,10 - Frontopolar area,0.0039
+,46 - Dorsolateral prefrontal cortex,0.7297
+,47 - Inferior prefrontal gyrus,0.2664
+,,
+D3,10 - Frontopolar area,0.2222
+,11 - Orbitofrontal area,0.7778
+,,
+D4,45 - pars triangularis Broca's area,0.0844
+,46 - Dorsolateral prefrontal cortex,0.3460
+,47 - Inferior prefrontal gyrus,0.5696
+,,
+D5,21 - Middle Temporal gyrus,0.9867
+,22 - Superior Temporal Gyrus,0.0133
+,,
+D6,2 - Primary Somatosensory Cortex,0.1006
+,21 - Middle Temporal gyrus,0.0409
+,22 - Superior Temporal Gyrus,0.8459
+,43 - Subcentral area,0.0063
+,48 - Retrosubicular area,0.0063
+,,
+D7,44 - pars opercularis_ part of Broca's area,0.2057
+,45 - pars triangularis Broca's area,0.7500
+,48 - Retrosubicular area,0.0443
+,,
+D8,10 - Frontopolar area,0.9253
+,11 - Orbitofrontal area,0.0605
+,46 - Dorsolateral prefrontal cortex,0.0142
+,,
+D9,10 - Frontopolar area,0.9270
+,11 - Orbitofrontal area,0.0657
+,46 - Dorsolateral prefrontal cortex,0.0073
+,,
+D10,6 - Pre-Motor and Supplementary Motor Cortex,0.3027
+,44 - pars opercularis_ part of Broca's area,0.2347
+,45 - pars triangularis Broca's area,0.0816
+,48 - Retrosubicular area,0.3810
+,,
+D11,21 - Middle Temporal gyrus,0.0852
+,22 - Superior Temporal Gyrus,0.8557
+,42 - Primary and Auditory Association Cortex,0.0557
+,48 - Retrosubicular area,0.0033
+,,
+D12,3 - Primary Somatosensory Cortex,0.0731
+,4 - Primary Motor Cortex,0.2577
+,6 - Pre-Motor and Supplementary Motor Cortex,0.5115
+,43 - Subcentral area,0.1577
+,,
+D13,9 - Dorsolateral prefrontal cortex,0.1244
+,45 - pars triangularis Broca's area,0.4785
+,46 - Dorsolateral prefrontal cortex,0.3971
+,,
+D14,9 - Dorsolateral prefrontal cortex,0.7743
+,10 - Frontopolar area,0.2257
+,,
+D15,9 - Dorsolateral prefrontal cortex,0.1045
+,44 - pars opercularis_ part of Broca's area,0.0045
+,45 - pars triangularis Broca's area,0.5591
+,46 - Dorsolateral prefrontal cortex,0.3318
+,,
+D16,1 - Primary Somatosensory Cortex,0.1986
+,2 - Primary Somatosensory Cortex,0.0505
+,3 - Primary Somatosensory Cortex,0.1119
+,4 - Primary Motor Cortex,0.1191
+,43 - Subcentral area,0.5199
+,,
+ CH1 (S1-D1),21 - Middle Temporal gyrus,0.9655
+,22 - Superior Temporal Gyrus,0.0345
+,,
+ CH2 (S1-D6),21 - Middle Temporal gyrus,0.6087
+,22 - Superior Temporal Gyrus,0.3913
+,,
+ CH3 (S2-D1),21 - Middle Temporal gyrus,0.2043
+,38 - Temporopolar area,0.7778
+,48 - Retrosubicular area,0.0179
+,,
+ CH4 (S2-D2),38 - Temporopolar area,0.0241
+,45 - pars triangularis Broca's area,0.2234
+,46 - Dorsolateral prefrontal cortex,0.3265
+,47 - Inferior prefrontal gyrus,0.4261
+,,
+ CH5 (S2-D7),38 - Temporopolar area,0.3192
+,44 - pars opercularis_ part of Broca's area,0.0033
+,45 - pars triangularis Broca's area,0.5407
+,48 - Retrosubicular area,0.1368
+,,
+ CH6 (S3-D2),10 - Frontopolar area,0.2828
+,11 - Orbitofrontal area,0.1148
+,46 - Dorsolateral prefrontal cortex,0.2787
+,47 - Inferior prefrontal gyrus,0.3238
+,,
+ CH7 (S3-D3),10 - Frontopolar area,0.1629
+,11 - Orbitofrontal area,0.8371
+,,
+ CH8 (S3-D8),10 - Frontopolar area,0.5548
+,11 - Orbitofrontal area,0.4452
+,,
+ CH9 (S4-D3),10 - Frontopolar area,0.0110
+,11 - Orbitofrontal area,0.9890
+,,
+ CH10 (S4-D4),10 - Frontopolar area,0.0990
+,46 - Dorsolateral prefrontal cortex,0.5198
+,47 - Inferior prefrontal gyrus,0.3812
+,,
+ CH11 (S4-D9),10 - Frontopolar area,0.4324
+,11 - Orbitofrontal area,0.5676
+,,
+ CH12 (S5-D4),38 - Temporopolar area,0.9897
+,47 - Inferior prefrontal gyrus,0.0103
+,,
+ CH13 (S5-D5),21 - Middle Temporal gyrus,0.9762
+,38 - Temporopolar area,0.0238
+,,
+ CH14 (S5-D10),21 - Middle Temporal gyrus,0.0341
+,38 - Temporopolar area,0.6177
+,48 - Retrosubicular area,0.3481
+,,
+ CH15 (S6-D5),20 - Inferior Temporal gyrus,0.1467
+,21 - Middle Temporal gyrus,0.8533
+,,
+ CH16 (S6-D11),20 - Inferior Temporal gyrus,0.0955
+,21 - Middle Temporal gyrus,0.6688
+,22 - Superior Temporal Gyrus,0.2357
+,,
+ CH17 (S7-D1),6 - Pre-Motor and Supplementary Motor Cortex,0.0271
+,21 - Middle Temporal gyrus,0.2508
+,22 - Superior Temporal Gyrus,0.0678
+,38 - Temporopolar area,0.0678
+,48 - Retrosubicular area,0.5864
+,,
+ CH18 (S7-D6),22 - Superior Temporal Gyrus,0.5314
+,43 - Subcentral area,0.3805
+,48 - Retrosubicular area,0.0881
+,,
+ CH19 (S7-D7),6 - Pre-Motor and Supplementary Motor Cortex,0.4277
+,44 - pars opercularis_ part of Broca's area,0.2862
+,45 - pars triangularis Broca's area,0.0193
+,48 - Retrosubicular area,0.2669
+,,
+ CH20 (S7-D12),4 - Primary Motor Cortex,0.0671
+,6 - Pre-Motor and Supplementary Motor Cortex,0.3706
+,43 - Subcentral area,0.5623
+,,
+ CH21 (S8-D2),45 - pars triangularis Broca's area,0.1522
+,46 - Dorsolateral prefrontal cortex,0.8478
+,,
+ CH22 (S8-D7),45 - pars triangularis Broca's area,0.9792
+,46 - Dorsolateral prefrontal cortex,0.0208
+,,
+ CH23 (S8-D8),10 - Frontopolar area,0.4431
+,46 - Dorsolateral prefrontal cortex,0.5569
+,,
+ CH24 (S8-D13),45 - pars triangularis Broca's area,0.8000
+,46 - Dorsolateral prefrontal cortex,0.2000
+,,
+ CH25 (S9-D3),10 - Frontopolar area,0.8875
+,11 - Orbitofrontal area,0.1125
+,,
+ CH26 (S9-D8),10 - Frontopolar area,1.0000
+,,
+ CH27 (S9-D9),10 - Frontopolar area,1.0000
+,,
+ CH28 (S9-D14),10 - Frontopolar area,1.0000
+,,
+ CH29 (S10-D4),45 - pars triangularis Broca's area,0.3285
+,46 - Dorsolateral prefrontal cortex,0.6715
+,,
+ CH30 (S10-D9),10 - Frontopolar area,0.3909
+,46 - Dorsolateral prefrontal cortex,0.6091
+,,
+ CH31 (S10-D10),45 - pars triangularis Broca's area,0.9964
+,48 - Retrosubicular area,0.0036
+,,
+ CH32 (S10-D15),45 - pars triangularis Broca's area,0.9016
+,46 - Dorsolateral prefrontal cortex,0.0984
+,,
+ CH33 (S11-D5),21 - Middle Temporal gyrus,0.5385
+,22 - Superior Temporal Gyrus,0.4114
+,48 - Retrosubicular area,0.0502
+,,
+ CH34 (S11-D10),6 - Pre-Motor and Supplementary Motor Cortex,0.2691
+,22 - Superior Temporal Gyrus,0.0532
+,43 - Subcentral area,0.0930
+,48 - Retrosubicular area,0.5847
+,,
+ CH35 (S11-D11),21 - Middle Temporal gyrus,0.2033
+,22 - Superior Temporal Gyrus,0.7967
+,,
+ CH36 (S11-D16),2 - Primary Somatosensory Cortex,0.0627
+,22 - Superior Temporal Gyrus,0.0941
+,43 - Subcentral area,0.7247
+,48 - Retrosubicular area,0.1185
+,,
+ CH37 (S12-D7),44 - pars opercularis_ part of Broca's area,0.4164
+,45 - pars triangularis Broca's area,0.5836
+,,
+ CH38 (S12-D12),4 - Primary Motor Cortex,0.0078
+,6 - Pre-Motor and Supplementary Motor Cortex,0.6163
+,9 - Dorsolateral prefrontal cortex,0.0775
+,44 - pars opercularis_ part of Broca's area,0.2984
+,,
+ CH39 (S12-D13),9 - Dorsolateral prefrontal cortex,0.0945
+,44 - pars opercularis_ part of Broca's area,0.3425
+,45 - pars triangularis Broca's area,0.4882
+,46 - Dorsolateral prefrontal cortex,0.0748
+,,
+ CH40 (S13-D8),9 - Dorsolateral prefrontal cortex,0.0164
+,10 - Frontopolar area,0.4098
+,46 - Dorsolateral prefrontal cortex,0.5738
+,,
+ CH41 (S13-D13),9 - Dorsolateral prefrontal cortex,0.4519
+,45 - pars triangularis Broca's area,0.0144
+,46 - Dorsolateral prefrontal cortex,0.5337
+,,
+ CH42 (S13-D14),9 - Dorsolateral prefrontal cortex,0.8594
+,10 - Frontopolar area,0.1205
+,46 - Dorsolateral prefrontal cortex,0.0201
+,,
+ CH43 (S14-D9),9 - Dorsolateral prefrontal cortex,0.0041
+,10 - Frontopolar area,0.4426
+,46 - Dorsolateral prefrontal cortex,0.5533
+,,
+ CH44 (S14-D14),9 - Dorsolateral prefrontal cortex,0.8975
+,10 - Frontopolar area,0.1025
+,,
+ CH45 (S14-D15),9 - Dorsolateral prefrontal cortex,0.4279
+,45 - pars triangularis Broca's area,0.0047
+,46 - Dorsolateral prefrontal cortex,0.5674
+,,
+ CH46 (S15-D10),6 - Pre-Motor and Supplementary Motor Cortex,0.2587
+,44 - pars opercularis_ part of Broca's area,0.6049
+,45 - pars triangularis Broca's area,0.1364
+,,
+ CH47 (S15-D15),44 - pars opercularis_ part of Broca's area,0.5194
+,45 - pars triangularis Broca's area,0.4806
+,,
+ CH48 (S15-D16),3 - Primary Somatosensory Cortex,0.0189
+,4 - Primary Motor Cortex,0.1780
+,6 - Pre-Motor and Supplementary Motor Cortex,0.5455
+,43 - Subcentral area,0.2576
+,,
