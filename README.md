@@ -13,7 +13,7 @@
 ### 均值
 1. 使用ReadMatRawdata.py读取预处理后mat格式数据，分段计算各通道oxy，dxy，total均值，保存在mean.csv中。
 2. 使用chazhi.py进行缺失值填补，生成mean_chazhi.csv。
-3. 组间：使用ReadCSV_mean.py进行mean_chazhi.csv读取，生成各通道不同阶段均值图片，并对每个通道每个阶段的均值进行Shapiro-Wilk 测试判断是否符合正态分布，符合正态分布进行方差齐性检验和独立样本 t 检验，否则进行Mann-Whitney U 检验。
+3. 组间：使用ReadCSV_mean.py进行mean_chazhi.csv读取，并对每个通道每个阶段的均值进行Shapiro-Wilk 测试判断是否符合正态分布，符合正态分布进行方差齐性检验和独立样本 t 检验，否则进行Mann-Whitney U 检验。
 4. 不同任务阶段之间：使用ReadCSV_mean.py进行mean_chazhi.csv读取，并对每个通道不同阶段的均值进行Shapiro-Wilk 测试判断是否符合正态分布，随后进行配对 t 检验和Wilcoxon符号秩检验。
 ### 积分值
 将预处理后的数据进行累加（使用最短数据的长度作为累加的长度）
