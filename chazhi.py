@@ -100,6 +100,8 @@ feature_chazhi('integral')
 feature_chazhi('variance')
 feature_chazhi('skewness')
 feature_chazhi('kurtosis')
+feature_chazhi('ALFF')
+feature_chazhi('fALFF')
 
 # GLM
 PTSDsub_list = pd.read_csv('PTSDsub_list.csv', dtype=str)

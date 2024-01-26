@@ -82,6 +82,7 @@ for subject in Subjects:
                 for filename in file[2]:
                     if filename.split('.')[1] == "mat":
                         if subject in filename:
+
                             # 读取MAT文件
                             data = scipy.io.loadmat(path + filename)
                             fnirs_oxyData = data['nirsdata']['oxyData'][0][0]
@@ -168,6 +169,7 @@ for subject in Subjects:
                                     header = header + "Ch" + str(channel_num + 1) + "_Pr" + str(
                                         Rawdatapaths.index(rawdatapath) + 1) + "_total,"
                             # print(path + filename)
+                            break
 header = header[:-1]
 header_len = header_len[:-1]
 np.savetxt('len.csv', len_array, delimiter=',', header=header_len, comments='')

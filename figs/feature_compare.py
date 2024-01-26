@@ -6,6 +6,7 @@ import csv
 from matplotlib import rcParams
 from matplotlib import cm
 import matplotlib.ticker as ticker
+import os
 
 config = {
     "font.family": 'serif',
@@ -16,7 +17,7 @@ config = {
 rcParams.update(config)
 
 rootdir = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py'
-featrue_compare_list = ['01mean', '02integral', '03variance', '04skewness', '05kurtosis', '06GLM']
+featrue_compare_list = ['01mean', '02integral', '03variance', '04skewness', '05kurtosis', '06GLM', '07ALFF', '08fALFF']
 result_no = '01'
 
 def find_row_by_content(file_name, target_content, type):
@@ -97,7 +98,7 @@ def draw_bar(values_per_category, categories, label_list, title, figsize):
     # # 显示图形
     # plt.show()
     # 保存图像
-    plt.savefig(title + '.jpg')
+    plt.savefig('feature_compare'+result_no+'\\'+title + '.jpg')
 
 
 between_task_array_channel = np.zeros((len(featrue_compare_list),6))
@@ -131,12 +132,14 @@ for featrue in featrue_compare_list:
 
 task_header = 'PTSD配对t检验显著,PTSD配对t检验显著且正态,PTSD Wilcoxon符号秩检验显著,HC配对t检验显著,HC配对t检验显著且正态,HC Wilcoxon符号秩检验显著'
 group_header = '独立样本t检验显著,独立样本t检验显著且正态,Mann-Whitney U检验显著'
+if not os.path.exists('feature_compare'+result_no):
+    os.mkdir('feature_compare'+result_no)
 
 print(between_task_array_channel)
-np.savetxt('feature_compare_task_channel_' + result_no + '.csv', between_task_array_channel, delimiter=',', header=task_header, comments='')
-categories = ['PTSD配对t检验显著', 'PTSD配对t检验显著且正态', 'PTSD Wilcoxon符号秩检验显著', 'HC配对t检验显著', 'HC配对t检验显著且正态', 'HC Wilcoxon符号秩检验显著']
+np.savetxt('feature_compare'+result_no+'\\'+'feature_compare_task_channel_' + result_no + '.csv', between_task_array_channel, delimiter=',', header=task_header, comments='')
+categories = ['PTSD配对t检验显著且正态', 'PTSD Wilcoxon符号秩检验显著', 'HC配对t检验显著且正态', 'HC Wilcoxon符号秩检验显著']
 title = '分通道任务间不同特征显著性分布'
-roi_plot = between_task_array_channel
+roi_plot = between_task_array_channel[:,[1,2,4,5]]
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
@@ -144,10 +147,10 @@ figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
 print(between_task_array_roi)
-np.savetxt('feature_compare_task_roi_' + result_no + '.csv', between_task_array_roi, delimiter=',', header=task_header, comments='')
-categories = ['PTSD配对t检验显著', 'PTSD配对t检验显著且正态', 'PTSD Wilcoxon符号秩检验显著', 'HC配对t检验显著', 'HC配对t检验显著且正态', 'HC Wilcoxon符号秩检验显著']
+np.savetxt('feature_compare'+result_no+'\\'+'feature_compare_task_roi_' + result_no + '.csv', between_task_array_roi, delimiter=',', header=task_header, comments='')
+categories = ['PTSD配对t检验显著且正态', 'PTSD Wilcoxon符号秩检验显著', 'HC配对t检验显著且正态', 'HC Wilcoxon符号秩检验显著']
 title = '分ROI任务间不同特征显著性分布'
-roi_plot = between_task_array_roi
+roi_plot = between_task_array_roi[:,[1,2,4,5]]
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
@@ -155,10 +158,10 @@ figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
 print(between_group_array_channel)
-np.savetxt('feature_compare_group_channel_' + result_no + '.csv', between_group_array_channel, delimiter=',', header=group_header, comments='')
-categories = ['独立样本t检验显著','独立样本t检验显著且正态','Mann-Whitney U检验显著']
+np.savetxt('feature_compare'+result_no+'\\'+'feature_compare_group_channel_' + result_no + '.csv', between_group_array_channel, delimiter=',', header=group_header, comments='')
+categories = ['独立样本t检验显著且正态','Mann-Whitney U检验显著']
 title = '分通道组间不同特征显著性分布'
-roi_plot = between_group_array_channel
+roi_plot = between_group_array_channel[:,[1,2]]
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
@@ -167,13 +170,12 @@ draw_bar(values_per_category, categories, label_list, title, figsize)
 
 
 print(between_group_array_roi)
-np.savetxt('feature_compare_group_roi_' + result_no + '.csv', between_group_array_roi, delimiter=',', header=group_header, comments='')
-categories = ['独立样本t检验显著','独立样本t检验显著且正态','Mann-Whitney U检验显著']
+np.savetxt('feature_compare'+result_no+'\\'+'feature_compare_group_roi_' + result_no + '.csv', between_group_array_roi, delimiter=',', header=group_header, comments='')
+categories = ['独立样本t检验显著且正态','Mann-Whitney U检验显著']
 title = '分ROI组间不同特征显著性分布'
-roi_plot = between_group_array_roi
+roi_plot = between_group_array_roi[:,[1,2]]
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
 figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
-
