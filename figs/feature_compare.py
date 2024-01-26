@@ -9,7 +9,7 @@ import matplotlib.ticker as ticker
 
 config = {
     "font.family": 'serif',
-    "font.size": 4,
+    "font.size": 10,
     "mathtext.fontset": 'stix',
     "font.serif": ['SimSun'],
 }
@@ -73,7 +73,7 @@ def draw_bar(values_per_category, categories, label_list, title, figsize):
                 plt.text(x=index[i] + bar_width * (j + 1),
                          y=values_per_category[i][j],
                          s=label_list[j], ha='center', va='bottom',
-                         fontdict=dict(fontsize=3,
+                         fontdict=dict(fontsize=10,
                                        # color='r',
                                        # family='monospace',  # ×ÖÌå,¿ÉÑ¡'serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'
                                        weight='bold',
@@ -140,7 +140,7 @@ roi_plot = between_task_array_channel
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
-figsize = (50, 6)
+figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
 print(between_task_array_roi)
@@ -151,7 +151,7 @@ roi_plot = between_task_array_roi
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
-figsize = (50, 6)
+figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
 print(between_group_array_channel)
@@ -162,7 +162,7 @@ roi_plot = between_group_array_channel
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
-figsize = (50, 6)
+figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
 
@@ -174,6 +174,6 @@ roi_plot = between_group_array_roi
 label_list = featrue_compare_list
 roi_sum = roi_plot.T
 values_per_category = list(roi_sum.tolist())
-figsize = (50, 6)
+figsize = (16, 9)
 draw_bar(values_per_category, categories, label_list, title, figsize)
 
