@@ -366,6 +366,9 @@ current_dir = os.getcwd()
 old_file = os.path.join(current_dir, 'count_roi.txt')
 new_file = os.path.join(current_dir, 'count_roi.csv')
 
+# 先检查新文件是否存在并删除（强制覆盖）
+if os.path.exists(new_file):
+    os.remove(new_file)
 # 使用os.rename()进行重命名
 os.rename(old_file, new_file)
 

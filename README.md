@@ -17,6 +17,9 @@
 4. 不同任务阶段之间：使用ReadCSV_mean.py进行mean_chazhi.csv读取，并对每个通道不同阶段的均值进行Shapiro-Wilk 测试判断是否符合正态分布，随后进行配对 t 检验和Wilcoxon符号秩检验。
 ### 积分值
 将预处理后的数据进行累加（使用最短数据的长度作为累加的长度）
+### 标准差
+### 偏度
+### 峰度
 ### 一般线性模型
 - design_inf更新
 	- 将Onset_and_Length.xlsx中对应信息填入design_inf.xlsx
@@ -25,6 +28,8 @@
 - ![image.png](https://s2.loli.net/2023/12/05/sEOQU6VMl24mC7H.png)
 - 使用ReadMatGLM生成result.xlsx存放在NIRS_KIT_Individual_Analysis文件夹中
 - 使用ReadGLM进行result.xlsx读取，并对每个特征进行Shapiro-Wilk 测试判断是否符合正态分布，符合正态分布进行方差齐性检验和独立样本 t 检验，否则进行Mann-Whitney U 检验。
+### ALFF&fALFF
+![image.png](https://s2.loli.net/2024/01/26/Xb9R6HJSn2LpVIt.png)
 
 ## 参数
 ### 01
