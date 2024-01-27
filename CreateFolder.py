@@ -1,7 +1,7 @@
 import os
 from shutil import copyfile
 
-rootdir = "D:\\fNIRS_Data\\zishu\\ALFF&fALFF\\"
+rootdir = "D:\\fNIRS_Data\\zishu\\ROI2ROI\\"
 periodlist = ["1RESTING\\","2COUNT\\","3SPEAK\\","4COUNT\\","5LISTEN\\","6COUNT\\"]
 grouplist = ["HC\\", "PTSD\\"]
 
