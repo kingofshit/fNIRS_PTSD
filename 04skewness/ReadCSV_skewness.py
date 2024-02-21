@@ -5,36 +5,32 @@ import os
 from scipy import stats
 from scipy.optimize import curve_fit
 
+feature_path = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\04skewness'
+# data = pd.read_csv('../mean.csv', dtype=float)
+data = pd.read_csv('../skewness_chazhi.csv', dtype=float)
+roi_percent = pd.read_csv(r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\mni\roi_percent.csv')
+
 PTSDsub_list = pd.read_csv('../PTSDsub_list.csv', dtype=str)
 PTSDsub_list = PTSDsub_list.values.tolist()[0]
 HCsub_list = pd.read_csv('../HCsub_list.csv', dtype=str)
 HCsub_list = HCsub_list.values.tolist()[0]
+sub_list = PTSDsub_list + HCsub_list
+
 oxy_list = ['oxy', 'dxy', 'total']
 Period_name_list = ['Resting', 'Count1', 'Speak', 'Count2', 'Listen', 'Count3']
-sub_list = PTSDsub_list + HCsub_list
-roi_count_array = np.array([11, 10, 10, 5, 5, 3, 2, 2])
 
-feature_path = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\04skewness'
-# data = pd.read_csv('../mean.csv', dtype=float)
-data = pd.read_csv('../skewness_chazhi.csv', dtype=float)
-
-roi = pd.read_csv(r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\mni\roi.csv')
-roi_name_list = roi.columns.tolist()
-roi_count_list = []
-for roi_num in range(0, len(roi_name_list)):
-    roi_name = roi_name_list[roi_num]
-    roi_channel_count = 0
-    for roi_channel in roi[roi_name]:
-        if not np.isnan(roi_channel):
-            # print(roi_channel)
-            roi_channel_count = roi_channel_count + 1
-    roi_count_list.append(roi_channel_count)
-roi_count_array = np.array(roi_count_list)
+roi_name_list = []
+for item_num in range(roi_percent.shape[0]):
+    item_in_list = 0
+    this_roi_name = str(roi_percent.loc[item_num, 'roi_num'])
+    for roi_name in roi_name_list:
+        if this_roi_name == roi_name:
+            item_in_list = 1
+            break
+    if item_in_list == 0:
+        roi_name_list.append(this_roi_name)
 
 
-# # 自定义曲线函数
-# def curve_func(x, a, b, c):
-#     return a*np.sin(2*np.pi/12*x+b)+c
 
 
 def get_mean(data, PTSDsub_list, HCsub_list, sub_no, channel_num, period_num, oxy_label):
@@ -56,7 +52,7 @@ def get_mean(data, PTSDsub_list, HCsub_list, sub_no, channel_num, period_num, ox
     return data.loc[sub_num, label]
 
 
-def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_num, oxy_label):
+def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_num, period_num, oxy_label):
     # channel_num   1-48
     # period_num   1:RESTING, 2:COUNT, 3:SPEAK, 4:COUNT, 5:LISTEN, 6:COUNT
     # oxy_num   1:OXY, 2:DXY, 3:TOTAL
@@ -68,7 +64,7 @@ def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_nu
         if sub_no == ALLsub_no:
             break;
         sub_num += 1
-    label = oxy_label + '_' + roi_name + '_' + Period_name_list[period_num - 1]
+    label = oxy_label + '_' + str(roi_num) + '_' + Period_name_list[period_num - 1]
 
     # # 打印标签和数据
     # print(sub_no + '  ' + label + ': ' + str(data.loc[sub_num, label]))
@@ -78,6 +74,7 @@ def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_nu
 # 分通道分析
 def channel_group():
     # 分通道独立样本t检验和Mann-Whitney U 检验
+    print('------分通道组间------')
     group_result_array = np.zeros((3 * 48 * 6, 7))
     group_result_header = "oxytype, channel, period, PTSD_test_pvalue, HC_test_pvalue, t_p_value, mannwhitneyu_p_value"
     for oxy_num in range(1, 4):
@@ -141,6 +138,7 @@ def channel_group():
 
 def channel_task():
     # 分通道配对t检验和Wilcoxon符号秩检验
+    print('------分通道任务间------')
     result_header = "oxytype, channel, period1, period2, PTSDperiod1_test_pvalue, PTSDperiod2_test_pvalue, PTSD_p_value, PTSD_mannwhitneyu_p_value, HCperiod1_test_pvalue, HCperiod2_test_pvalue, HC_p_value, HC_mannwhitneyu_p_value"
     result_array = np.zeros((3 * 48 * 15, 12))
     channel_sum_array = np.zeros((48, 3))
@@ -269,61 +267,45 @@ def channel_task():
                         #     if HC_mannwhitneyu_p_value < 0.05:
                         #         print('- Wilcoxon符号秩检验HC_Ch' + str(channel_num) + '_' + str(period_num) + '_' + str(another_period_num) + ': ' + str(HC_mannwhitneyu_p_value))
                         pair_no = pair_no + 1
-    np.savetxt('result_channel.csv', result_array, delimiter=',', header=result_header, comments='', fmt='%.14f')
+    np.savetxt('result_task_channel.csv', result_array, delimiter=',', header=result_header, comments='', fmt='%.14f')
 
 
 # 分脑区分析
 def roi_calculate():
     # 分脑区计算特征并存储
+    print('------分脑区计算------')
     roi_value_header = ""
     roi_value_array = np.zeros((len(PTSDsub_list) + len(HCsub_list), 3 * len(roi_name_list) * 6))
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
-        # print('##### ' + oxy_label)
-        for roi_num in range(0, len(roi_name_list)):
-            roi_name = roi_name_list[roi_num]
+        for roi_num in range(len(roi_name_list)):
+            for item_num in range(roi_percent.shape[0]):
+                if str(roi_percent.loc[item_num, 'roi_num']) == roi_name_list[roi_num]:
+                    channel_num = roi_percent.loc[item_num, 'channel_num']
+                    for sub_num in range(0, len(sub_list)):
+                        sub_no = sub_list[sub_num]
+                        for period_num in range(1, 7):
+                            feature_value = get_mean(data, PTSDsub_list, HCsub_list, sub_no, channel_num, period_num, oxy_label)
+                            roi_value_array[sub_num, (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1] += feature_value*roi_percent.loc[item_num, 'channel_percentage']
             for period_num in range(1, 7):
-                # print('##### ' + oxy_label + '_' + roi_name + '_' + Period_name_list[period_num - 1])
-                roi_value_header = roi_value_header + oxy_label + '_' + roi_name + '_' + Period_name_list[
-                    period_num - 1] + ','
-                # print((oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1)
-                roi_channel_count = 0
-                for roi_channel in roi[roi_name]:
-                    if not np.isnan(roi_channel):
-                        # print(roi_channel)
-                        roi_channel_count = roi_channel_count + 1
-                        channel_num = int(roi_channel)
-                        for sub_num in range(0, len(sub_list)):
-                            sub_no = sub_list[sub_num]
-                            feature_value = get_mean(data, PTSDsub_list, HCsub_list, sub_no, channel_num, period_num,
-                                                     oxy_label)
-                            roi_value_array[
-                                sub_num, (oxy_num - 1) * len(
-                                    roi_name_list) * 6 + roi_num * 6 + period_num - 1] += feature_value
-                            # roi_value_array[(oxy_num-1)*8*6+(np.sum(roi_count_array[:roi_num])+roi_channel_count)*6+period_num-1, ]
-            for period_num in range(1, 7):
-                for sub_num in range(0, len(sub_list)):
-                    roi_value_array[sub_num, (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1] = (
-                            roi_value_array[
-                                sub_num, (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1] /
-                            roi_count_array[roi_num])
-                # print('roi_channel_count:  '+ str(roi_channel_count))
+                roi_value_header = roi_value_header + oxy_label + '_' + roi_name_list[roi_num] + '_' + Period_name_list[period_num - 1] + ','
+
     roi_value_header = roi_value_header[:-1]
     np.savetxt(feature_path + '\\' + 'value_roi.csv', roi_value_array, delimiter=',', header=roi_value_header,
                comments='',
                fmt='%.14f')
 
 
-def roi_group():
+def roi_task():
     # 分脑区配对t检验和Wilcoxon符号秩检验
+    print('------分脑区任务间------')
     roi_result_header = "oxytype, roi, period1, period2, PTSDperiod1_test_pvalue, PTSDperiod2_test_pvalue, PTSD_p_value, PTSD_mannwhitneyu_p_value, HCperiod1_test_pvalue, HCperiod2_test_pvalue, HC_p_value, HC_mannwhitneyu_p_value"
     roi_data = pd.read_csv(feature_path + '\\' + 'value_roi.csv', dtype=float)
     roi_result_array = np.zeros((3 * len(roi_name_list) * 15, 12))
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
         # print('##### ' + oxy_label)
-        for roi_num in range(0, len(roi_name_list)):
-            roi_name = roi_name_list[roi_num]
+        for roi_num in range(len(roi_name_list)):
             pair_no = 0
             for period_num in range(1, 7):
                 for another_period_num in range(period_num, 7):
@@ -336,17 +318,17 @@ def roi_group():
                         HCperiod2 = []
                         for sub_no in PTSDsub_list:
                             PTSDperiod1.append(
-                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_num,
+                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], period_num,
                                              oxy_label))
                             PTSDperiod2.append(
-                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, another_period_num,
+                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], another_period_num,
                                              oxy_label))
                         for sub_no in HCsub_list:
                             HCperiod1.append(
-                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_num,
+                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], period_num,
                                              oxy_label))
                             HCperiod2.append(
-                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, another_period_num,
+                                get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], another_period_num,
                                              oxy_label))
 
                         # 检验正态性
@@ -364,61 +346,51 @@ def roi_group():
 
                         if PTSDperiod1_test_pvalue > 0.05 and PTSDperiod2_test_pvalue > 0.05:
                             if PTSD_p_value < 0.05:
-                                print('- PTSD配对t检验显著： ' + oxy_label + '_' + roi_name + '_' + Period_name_list[
+                                print('- PTSD配对t检验显著： ' + oxy_label + '_' + str(roi_num) + '_' + Period_name_list[
                                     period_num - 1] + '_' + Period_name_list[another_period_num - 1] + ': ' + str(
                                     PTSD_p_value))
                         if HCperiod1_test_pvalue > 0.05 and HCperiod2_test_pvalue > 0.05:
                             if HC_p_value < 0.05:
-                                print('- HC配对t检验显著： ' + oxy_label + '_' + roi_name + '_' + Period_name_list[
+                                print('- HC配对t检验显著： ' + oxy_label + '_' + str(roi_num) + '_' + Period_name_list[
                                     period_num - 1] + '_' + Period_name_list[another_period_num - 1] + ': ' + str(
                                     HC_p_value))
 
                         roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 0] = oxy_num
                         roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 1] = roi_num
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 2] = period_num
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 3] = another_period_num
-                        roi_result_array[(oxy_num - 1) * len(
-                            roi_name_list) * 15 + roi_num * 15 + pair_no, 4] = PTSDperiod1_test_pvalue
-                        roi_result_array[(oxy_num - 1) * len(
-                            roi_name_list) * 15 + roi_num * 15 + pair_no, 5] = PTSDperiod2_test_pvalue
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 6] = PTSD_p_value
-                        roi_result_array[(oxy_num - 1) * len(
-                            roi_name_list) * 15 + roi_num * 15 + pair_no, 7] = PTSD_mannwhitneyu_p_value
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 8] = HCperiod1_test_pvalue
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 9] = HCperiod2_test_pvalue
-                        roi_result_array[
-                            (oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 10] = HC_p_value
-                        roi_result_array[(oxy_num - 1) * len(
-                            roi_name_list) * 15 + roi_num * 15 + pair_no, 11] = HC_mannwhitneyu_p_value
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 2] = period_num
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 3] = another_period_num
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 4] = PTSDperiod1_test_pvalue
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 5] = PTSDperiod2_test_pvalue
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 6] = PTSD_p_value
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 7] = PTSD_mannwhitneyu_p_value
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 8] = HCperiod1_test_pvalue
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 9] = HCperiod2_test_pvalue
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 10] = HC_p_value
+                        roi_result_array[(oxy_num - 1) * len(roi_name_list) * 15 + roi_num * 15 + pair_no, 11] = HC_mannwhitneyu_p_value
                         pair_no = pair_no + 1
-    np.savetxt(feature_path + '\\' + 'result_roi.csv', roi_result_array, delimiter=',', header=roi_result_header,
+    np.savetxt(feature_path + '\\' + 'result_task_roi.csv', roi_result_array, delimiter=',', header=roi_result_header,
                comments='', fmt='%.14f')
 
 
-def roi_task():
+def roi_group():
     # 分脑区独立样本t检验和Mann-Whitney U 检验
+    print('------分脑区组间------')
     roi_data = pd.read_csv(feature_path + '\\' + 'value_roi.csv', dtype=float)
     roi_group_result_header = "oxytype, roi, period, PTSD_test_pvalue, HC_test_pvalue, t_p_value, mannwhitneyu_p_value"
     roi_group_result_array = np.zeros((3 * len(roi_name_list) * 6, 7))
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
         # print('##### ' + oxy_label)
-        for roi_num in range(0, len(roi_name_list)):
-            roi_name = roi_name_list[roi_num]
+        for roi_num in range(len(roi_name_list)):
             for period_num in range(1, 7):
                 PTSD_list = []
                 HC_list = []
                 for sub_no in PTSDsub_list:
                     PTSD_list.append(
-                        get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_num, oxy_label))
+                        get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], period_num, oxy_label))
                 for sub_no in HCsub_list:
                     HC_list.append(
-                        get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_num, oxy_label))
+                        get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name_list[roi_num], period_num, oxy_label))
 
                 # 检验正态性
                 PTSD_test_statistic, PTSD_test_pvalue = stats.shapiro(PTSD_list)
@@ -430,22 +402,15 @@ def roi_task():
 
                 if PTSD_test_pvalue > 0.05 and HC_test_pvalue > 0.05:
                     if t_p_value < 0.05:
-                        print('- 独立样本t检验显著： ' + oxy_label + '_' + roi_name + '_' + Period_name_list[
+                        print('- 独立样本t检验显著： ' + oxy_label + '_' + str(roi_num) + '_' + Period_name_list[
                             period_num - 1] + ': ' + str(t_p_value))
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 0] = oxy_num
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 1] = roi_num
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 2] = period_num
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 3] = PTSD_test_pvalue
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 4] = HC_test_pvalue
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 5] = t_p_value
-                roi_group_result_array[
-                    (oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 6] = mannwhitneyu_p_value
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 0] = oxy_num
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 1] = roi_num
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 2] = period_num
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 3] = PTSD_test_pvalue
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 4] = HC_test_pvalue
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 5] = t_p_value
+                roi_group_result_array[(oxy_num - 1) * len(roi_name_list) * 6 + roi_num * 6 + period_num - 1, 6] = mannwhitneyu_p_value
     np.savetxt(feature_path + '\\' + 'result_group_roi.csv', roi_group_result_array, delimiter=',',
                header=roi_group_result_header, comments='', fmt='%.14f')
 
