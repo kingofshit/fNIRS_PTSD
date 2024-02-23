@@ -17,7 +17,7 @@ config = {
 rcParams.update(config)
 
 rootdir = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py'
-featrue_compare_list = ['01mean', '02integral', '03variance', '04skewness', '05kurtosis']
+featrue_compare_list = ['01mean', '02integral', '03variance', '04skewness', '05kurtosis', '06GLM', '07ALFF', '08fALFF']
 result_no = '01'
 
 def find_row_by_content(file_name, target_content, type):

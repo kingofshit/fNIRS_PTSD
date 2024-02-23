@@ -14,6 +14,7 @@ config = {
 }
 rcParams.update(config)
 
+if_draw = 0
 PTSDsub_list = pd.read_csv('../PTSDsub_list.csv', dtype=str)
 PTSDsub_list = PTSDsub_list.values.tolist()[0]
 HCsub_list = pd.read_csv('../HCsub_list.csv', dtype=str)
@@ -32,83 +33,85 @@ roi_name_list = roi_table.columns.tolist()
 
 
 def draw_heatmap(data, xticks_labels, yticks_labels, title):
-    fig, ax = plt.subplots(figsize=(20, 4), dpi=300)
-    # plt.figure(figsize=(10, 10), dpi=100)
-    cmap = 'Reds_r'  # 你可以选择不同的颜色映射方案
-    ax.imshow(data, cmap=cmap)
-    ax.set_title(title, fontsize=15, y=1.05)
-    # 在每个单元格中心位置添加数值标签
-    for i in range(data.shape[0]):
-        for j in range(data.shape[1]):
-            if data[i, j] < 0.05:
-                text_val = format(data[i, j], '.3f')  # 格式化数值
-                ax.text(j, i, text_val, ha="center", va="center", color="w")
-    # 设置坐标轴标题
-    plt.xlabel('通道')
-    plt.ylabel('任务')
-    # 设置坐标轴标签
-    x_position = range(len(xticks_labels))
-    plt.xticks(x_position, xticks_labels)
-    plt.xticks(rotation=45)
-    y_position = range(len(yticks_labels))
-    plt.yticks(y_position, yticks_labels)
-    # 隐藏x轴和y轴的主要刻度线，但保留刻度标签
-    plt.tick_params(axis='both', which='major', length=0)
-    # # 添加colorbar
-    # plt.colorbar(pad=0.2, shrink=0.6)
-    plt.subplots_adjust(left=0.05, right=0.95)  # 左侧留白为15%，右侧留白为10%
-    # # 显示图形
-    # plt.show()
-    # 保存图像
-    plt.savefig('channel_' + title + '.jpg')
+    if if_draw == 1:
+        fig, ax = plt.subplots(figsize=(20, 4), dpi=300)
+        # plt.figure(figsize=(10, 10), dpi=100)
+        cmap = 'Reds_r'  # 你可以选择不同的颜色映射方案
+        ax.imshow(data, cmap=cmap)
+        ax.set_title(title, fontsize=15, y=1.05)
+        # 在每个单元格中心位置添加数值标签
+        for i in range(data.shape[0]):
+            for j in range(data.shape[1]):
+                if data[i, j] < 0.05:
+                    text_val = format(data[i, j], '.3f')  # 格式化数值
+                    ax.text(j, i, text_val, ha="center", va="center", color="w")
+        # 设置坐标轴标题
+        plt.xlabel('通道')
+        plt.ylabel('任务')
+        # 设置坐标轴标签
+        x_position = range(len(xticks_labels))
+        plt.xticks(x_position, xticks_labels)
+        plt.xticks(rotation=45)
+        y_position = range(len(yticks_labels))
+        plt.yticks(y_position, yticks_labels)
+        # 隐藏x轴和y轴的主要刻度线，但保留刻度标签
+        plt.tick_params(axis='both', which='major', length=0)
+        # # 添加colorbar
+        # plt.colorbar(pad=0.2, shrink=0.6)
+        plt.subplots_adjust(left=0.05, right=0.95)  # 左侧留白为15%，右侧留白为10%
+        # # 显示图形
+        # plt.show()
+        # 保存图像
+        plt.savefig('channel_' + title + '.jpg')
 
 
 def draw_bar(values_per_category, categories, label_list, title, figsize):
-    fig, ax = plt.subplots(figsize=figsize, dpi=300)  # 自定义图形大小
-    bar_width = 1 / (len(values_per_category[0]) + 1)
-    index = np.arange(len(categories))
-    label_data_pos = np.zeros((len(categories), len(values_per_category[0])))
-    data_values = np.linspace(0, 1, len(values_per_category[0]))  # 创建一个从0到1均匀分布的数组
-    # 选择一个cmap，例如 'viridis'
-    cmap_name = 'Wistia'
-    cmap = cm.get_cmap(cmap_name)
-    # 将数据值映射到颜色
-    colors = cmap(data_values)
-    # 遍历所有类别并绘制条形图
-    for i in range(len(categories)):
+    if if_draw == 1:
+        fig, ax = plt.subplots(figsize=figsize, dpi=300)  # 自定义图形大小
+        bar_width = 1 / (len(values_per_category[0]) + 1)
+        index = np.arange(len(categories))
+        label_data_pos = np.zeros((len(categories), len(values_per_category[0])))
+        data_values = np.linspace(0, 1, len(values_per_category[0]))  # 创建一个从0到1均匀分布的数组
+        # 选择一个cmap，例如 'viridis'
+        cmap_name = 'Wistia'
+        cmap = cm.get_cmap(cmap_name)
+        # 将数据值映射到颜色
+        colors = cmap(data_values)
+        # 遍历所有类别并绘制条形图
+        for i in range(len(categories)):
+            for j in range(len(values_per_category[i])):
+                # print(str(i) + ',' + str(j) + ':  ' + str(values_per_category[i][j]))
+                # print(index[i] + bar_width * (j + 1))
+                label_data_pos[i, j] = index[i] + bar_width * (j + 1)
+                if values_per_category[i][j] > 0:
+                    plt.text(x=index[i] + bar_width * (j + 1),
+                             y=values_per_category[i][j],
+                             s=label_list[j], ha='center', va='bottom',
+                             fontdict=dict(fontsize=12,
+                                           # color='r',
+                                           # family='monospace',  # 字体,可选'serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'
+                                           weight='bold',
+                                           # 磅值，可选'light', 'normal', 'medium', 'semibold', 'bold', 'heavy', 'black'
+                                           )  # 字体属性设置
+                             )
         for j in range(len(values_per_category[i])):
-            # print(str(i) + ',' + str(j) + ':  ' + str(values_per_category[i][j]))
-            # print(index[i] + bar_width * (j + 1))
-            label_data_pos[i, j] = index[i] + bar_width * (j + 1)
-            if values_per_category[i][j] > 0:
-                plt.text(x=index[i] + bar_width * (j + 1),
-                         y=values_per_category[i][j],
-                         s=label_list[j], ha='center', va='bottom',
-                         fontdict=dict(fontsize=12,
-                                       # color='r',
-                                       # family='monospace',  # 字体,可选'serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'
-                                       weight='bold',
-                                       # 磅值，可选'light', 'normal', 'medium', 'semibold', 'bold', 'heavy', 'black'
-                                       )  # 字体属性设置
-                         )
-    for j in range(len(values_per_category[i])):
-        ax.bar(label_data_pos[:, j], np.array(values_per_category)[:, j], width=bar_width, label=label_list[j],
-               color=colors[j])
+            ax.bar(label_data_pos[:, j], np.array(values_per_category)[:, j], width=bar_width, label=label_list[j],
+                   color=colors[j])
 
-    # 设置 x 轴刻度标签，确保它们与条形对齐
-    plt.xticks(index + bar_width * (len(values_per_category[0]) + 1) / 2, categories)
-    ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))  # 只选择整数刻度
-    # 隐藏x轴和y轴的主要刻度线，但保留刻度标签
-    plt.tick_params(axis='both', which='major', length=0)
-    # 设置标题和坐标轴标签
-    plt.title(title)
-    plt.ylabel('数量')
-    # # 显示图例
-    # plt.legend(loc='best')
-    # # 显示图形
-    # plt.show()
-    # 保存图像
-    plt.savefig('channel_' + title + '.jpg')
+        # 设置 x 轴刻度标签，确保它们与条形对齐
+        plt.xticks(index + bar_width * (len(values_per_category[0]) + 1) / 2, categories)
+        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))  # 只选择整数刻度
+        # 隐藏x轴和y轴的主要刻度线，但保留刻度标签
+        plt.tick_params(axis='both', which='major', length=0)
+        # 设置标题和坐标轴标签
+        plt.title(title)
+        plt.ylabel('数量')
+        # # 显示图例
+        # plt.legend(loc='best')
+        # # 显示图形
+        # plt.show()
+        # 保存图像
+        plt.savefig('channel_' + title + '.jpg')
 
 
 def between_task():
@@ -298,16 +301,15 @@ def between_task():
 def between_group():
     # 组间
     oxy_sum = np.zeros((3, 3))
-    channel_sum = np.zeros((48, 3))
-    roi_sum = np.zeros((len(roi_name_list), 3))
+    channel_connection_sum = np.zeros((1128, 3))
     period_sum = np.zeros((6, 3))
     for plot_oxy_type in [1, 2, 3]:
         group_result_data = pd.read_csv('result_group_channel.csv', dtype=float)
-        plot_t_data = np.zeros((6, 48))
-        plot_mannwhitneyu_data = np.zeros((6, 48))
+        # plot_t_data = np.zeros((6, 48))
+        # plot_mannwhitneyu_data = np.zeros((6, 48))
         for i in range(0, group_result_data.shape[0]):
             oxytype = group_result_data.iat[i, 0]
-            channel = group_result_data.iat[i, 1]
+            channel_connnection = group_result_data.iat[i, 1]
             period = group_result_data.iat[i, 2]
             PTSD_test_pvalue = group_result_data.iat[i, 3]
             HC_test_pvalue = group_result_data.iat[i, 4]
@@ -315,57 +317,47 @@ def between_group():
             mannwhitneyu_p_value = group_result_data.iat[i, 6]
 
             oxy_label = oxy_list[int(oxytype) - 1]
-            channel_name = channel_list[int(channel - 1)]
-            for roi_num in range(0, len(roi_name_list)):
-                roi_name = roi_name_list[roi_num]
-                for roi_channel in roi_table[roi_name]:
-                    if not np.isnan(roi_channel):
-                        if int(roi_channel) == int(channel):
-                            # print(str(roi_num)+roi_name)
-                            roi = roi_num + 1
+            # channel_name = channel_list[int(channel - 1)]
 
             if int(oxytype) == plot_oxy_type:
                 if t_p_value < 0.05:
                     oxy_sum[plot_oxy_type - 1, 0] += 1
-                    channel_sum[int(channel - 1), 0] += 1
-                    roi_sum[int(roi - 1), 0] += 1
+                    channel_connection_sum[int(channel_connnection), 0] += 1
                     period_sum[int(period) - 1, 0] += 1
                     if PTSD_test_pvalue > 0.05 and HC_test_pvalue > 0.05:
                         oxy_sum[plot_oxy_type - 1, 1] += 1
-                        channel_sum[int(channel - 1), 1] += 1
-                        roi_sum[int(roi - 1), 1] += 1
+                        channel_connection_sum[int(channel_connnection), 1] += 1
                         period_sum[int(period) - 1, 1] += 1
-                        print('- 独立样本t检验显著： ' + oxy_label + '_' + str(channel_name) + '_' + Period_name_list[
+                        print('- 独立样本t检验显著： ' + oxy_label + '_' + str(channel_connnection) + '_' + Period_name_list[
                             int(period) - 1] + ': ' + str(t_p_value))
                 if mannwhitneyu_p_value < 0.05:
                     oxy_sum[plot_oxy_type - 1, 2] += 1
-                    channel_sum[int(channel - 1), 2] += 1
-                    roi_sum[int(roi - 1), 2] += 1
+                    channel_connection_sum[int(channel_connnection), 2] += 1
                     period_sum[int(period) - 1, 2] += 1
-                    print('- mannwhitney u检验显著： ' + oxy_label + '_' + str(channel_name) + '_' + Period_name_list[
+                    print('- mannwhitney u检验显著： ' + oxy_label + '_' + str(channel_connnection) + '_' + Period_name_list[
                         int(period) - 1] + ': ' + str(mannwhitneyu_p_value))
-                plot_t_data[int(period) - 1, channel_name - 1] = t_p_value
-                plot_mannwhitneyu_data[int(period) - 1, channel_name - 1] = mannwhitneyu_p_value
+                # plot_t_data[int(period) - 1, channel_name - 1] = t_p_value
+                # plot_mannwhitneyu_data[int(period) - 1, channel_name - 1] = mannwhitneyu_p_value
 
-        plot_t_roi = np.zeros((6, 48))
-        plot_mannwhitneyu_roi = np.zeros((6, 48))
-        roi_channel_num = 0
-        roi_channel_list = []
-        for roi_num in range(0, len(roi_name_list)):
-            roi_name = roi_name_list[roi_num]
-            for roi_channel in roi_table[roi_name]:
-                if not np.isnan(roi_channel):
-                    plot_t_roi[:, roi_channel_num] = plot_t_data[:, int(roi_channel) - 1]
-                    plot_mannwhitneyu_roi[:, roi_channel_num] = plot_mannwhitneyu_data[:, int(roi_channel) - 1]
-                    roi_channel_num += 1
-                    roi_channel_list.append(int(roi_channel))
+        # plot_t_roi = np.zeros((6, 48))
+        # plot_mannwhitneyu_roi = np.zeros((6, 48))
+        # roi_channel_num = 0
+        # roi_channel_list = []
+        # for roi_num in range(0, len(roi_name_list)):
+        #     roi_name = roi_name_list[roi_num]
+        #     for roi_channel in roi_table[roi_name]:
+        #         if not np.isnan(roi_channel):
+        #             plot_t_roi[:, roi_channel_num] = plot_t_data[:, int(roi_channel) - 1]
+        #             plot_mannwhitneyu_roi[:, roi_channel_num] = plot_mannwhitneyu_data[:, int(roi_channel) - 1]
+        #             roi_channel_num += 1
+        #             roi_channel_list.append(int(roi_channel))
 
-        xticks_labels = roi_channel_list
-        yticks_labels = Period_name_list
-        title = oxy_list[int(plot_oxy_type) - 1] + '  独立样本t检验'
-        draw_heatmap(plot_t_roi, xticks_labels, yticks_labels, title)
-        title = oxy_list[int(plot_oxy_type) - 1] + '  Mann-Whitney U检验'
-        draw_heatmap(plot_mannwhitneyu_roi, xticks_labels, yticks_labels, title)
+        # xticks_labels = roi_channel_list
+        # yticks_labels = Period_name_list
+        # title = oxy_list[int(plot_oxy_type) - 1] + '  独立样本t检验'
+        # draw_heatmap(plot_t_roi, xticks_labels, yticks_labels, title)
+        # title = oxy_list[int(plot_oxy_type) - 1] + '  Mann-Whitney U检验'
+        # draw_heatmap(plot_mannwhitneyu_roi, xticks_labels, yticks_labels, title)
 
     print(oxy_sum)
     categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']
@@ -389,11 +381,11 @@ def between_group():
                 file.write(str(oxy_sum.T[i, j])+',')
             file.write("\n")
 
-    print(channel_sum)
+    # print(channel_sum)
     categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']
-    title = '组间不同通道显著性分布'
-    channel_sum = channel_sum.T
-    label_list = list(range(1, 49))
+    title = '组间不同通道连接显著性分布'
+    channel_sum = channel_connection_sum.T
+    label_list = list(range(1, 1129))
     values_per_category = list(channel_sum.tolist())
     figsize = (50, 6)
     draw_bar(values_per_category, categories, label_list, title, figsize)
@@ -406,22 +398,22 @@ def between_group():
                 file.write(str(channel_sum.T[i, j])+',')
             file.write("\n")
 
-    print(roi_sum)
-    categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']
-    title = '组间不同ROI显著性分布'
-    roi_sum = roi_sum.T
-    label_list = roi_name_list
-    values_per_category = list(roi_sum.tolist())
-    figsize = (26, 6)
-    draw_bar(values_per_category, categories, label_list, title, figsize)
-    with open("count_channel.txt", "a") as file:
-        file.write(title + ",\n")
-        file.write("类别,独立样本t检验显著,独立样本t检验显著且正态,Mann-Whitney U检验显著," + "\n")
-        for i in range(0, roi_sum.T.shape[0]):
-            file.write(label_list[i]+',')
-            for j in range(0, roi_sum.T.shape[1]):
-                file.write(str(roi_sum.T[i, j])+',')
-            file.write("\n")
+    # print(roi_sum)
+    # categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']
+    # title = '组间不同ROI显著性分布'
+    # roi_sum = roi_sum.T
+    # label_list = roi_name_list
+    # values_per_category = list(roi_sum.tolist())
+    # figsize = (26, 6)
+    # draw_bar(values_per_category, categories, label_list, title, figsize)
+    # with open("count_channel.txt", "a") as file:
+    #     file.write(title + ",\n")
+    #     file.write("类别,独立样本t检验显著,独立样本t检验显著且正态,Mann-Whitney U检验显著," + "\n")
+    #     for i in range(0, roi_sum.T.shape[0]):
+    #         file.write(label_list[i]+',')
+    #         for j in range(0, roi_sum.T.shape[1]):
+    #             file.write(str(roi_sum.T[i, j])+',')
+    #         file.write("\n")
 
     print(period_sum)
     categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']

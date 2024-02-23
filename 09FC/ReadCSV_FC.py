@@ -4,6 +4,10 @@ import numpy as np
 import os
 from scipy import stats
 from scipy.optimize import curve_fit
+import statsmodels.stats.multitest as smm
+
+# # 对这些P值进行FDR校正
+# corrected_p_values = smm.multipletests(raw_p_values, method='fdr_bh')[1]
 
 PTSDsub_list = pd.read_csv('../PTSDsub_list.csv', dtype=str)
 PTSDsub_list = PTSDsub_list.values.tolist()[0]
@@ -79,14 +83,15 @@ def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_nu
 def channel_group():
     # 分通道独立样本t检验和Mann-Whitney U 检验
     group_result_array = np.zeros((3 * 1128 * 6, 7))
-    group_result_header = "oxytype, channel, period, PTSD_test_pvalue, HC_test_pvalue, t_p_value, mannwhitneyu_p_value"
+    group_result_header = "oxytype, channel_connnection, period, PTSD_test_pvalue, HC_test_pvalue, t_p_value, mannwhitneyu_p_value"
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
         # print('##### ' + oxy_label)
         t_p_value_array = np.zeros((6, 1128))
         mannwhitneyu_p_value_array = np.zeros((6, 1128))
-        for connection_num in range(0, 1128):
-            for period_num in range(1, 7):
+        for period_num in range(1, 7):
+            print('##### ' + oxy_label+'_'+Period_name_list[period_num-1])
+            for connection_num in range(0, 1128):
                 HC = []
                 PTSD = []
                 for sub_no in PTSDsub_list:
@@ -104,17 +109,17 @@ def channel_group():
                 mannwhitneyu_statistic, mannwhitneyu_p_value = stats.mannwhitneyu(HC, PTSD)
                 mannwhitneyu_p_value_array[period_num - 1, connection_num] = mannwhitneyu_p_value
 
-                if HC_test_pvalue > 0.05 and PTSD_test_pvalue > 0.05:
-                    # 使用Levene's test进行方差齐性检验
-                    Levene_w, Levene_p_value = stats.levene(HC, PTSD)
-                    # 如果p值＜0.05且数据符合正态分布则输出结果
-                    if t_p_value < 0.05:
-                        # 如果p值小于显著性水平（通常为0.05），则拒绝原假设（即认为方差不齐）
-                        if Levene_p_value < 0.05:
-                            print("方差不齐")
-                        print('- CONNECTION ' + str(connection_num) + ' period ' + str(
-                            period_num) + ' t 检验:  p value is ' + str(
-                            t_p_value))
+                # if HC_test_pvalue > 0.05 and PTSD_test_pvalue > 0.05:
+                #     # 使用Levene's test进行方差齐性检验
+                #     Levene_w, Levene_p_value = stats.levene(HC, PTSD)
+                #     # 如果p值＜0.05且数据符合正态分布则输出结果
+                #     if t_p_value < 0.05:
+                #         # 如果p值小于显著性水平（通常为0.05），则拒绝原假设（即认为方差不齐）
+                #         if Levene_p_value < 0.05:
+                #             print("方差不齐")
+                #         print('- CONNECTION ' + str(connection_num) + ' period ' + str(
+                #             period_num) + ' t 检验:  p value is ' + str(
+                #             t_p_value))
                         # plt.boxplot([np.array(HC), np.array(PTSD)])
                         # plt.xticks([1, 2], ['HC', 'PTSD'])
                         # plt.ylabel('Channel ' + str(channel_num) + '_Period ' + str(period_num) + '_' + oxy_label + '_Value')
@@ -449,8 +454,8 @@ def roi_task():
 
 channel_group()
 # channel_task()
-roi_calculate()
-roi_group()
+# roi_calculate()
+# roi_group()
 # roi_task()
 # # 按照通道画图
 # # 选择血氧数据 1:OXY, 2:DXY, 3:TOTAL
