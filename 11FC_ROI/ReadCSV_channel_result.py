@@ -301,7 +301,7 @@ def between_task():
 def between_group():
     # 组间
     oxy_sum = np.zeros((3, 3))
-    channel_connection_sum = np.zeros((1128, 3))
+    channel_connection_sum = np.zeros((136, 3))
     period_sum = np.zeros((6, 3))
     for plot_oxy_type in [1, 2, 3]:
         group_result_data = pd.read_csv('result_group_channel.csv', dtype=float)
@@ -385,7 +385,7 @@ def between_group():
     categories = ['独立样本t检验显著', '独立样本t检验显著且正态', 'Mann-Whitney U检验显著']
     title = '组间不同通道连接显著性分布'
     channel_sum = channel_connection_sum.T
-    label_list = list(range(1, 1129))
+    label_list = list(range(1, 137))
     values_per_category = list(channel_sum.tolist())
     figsize = (50, 6)
     draw_bar(values_per_category, categories, label_list, title, figsize)

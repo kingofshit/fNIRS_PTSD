@@ -18,9 +18,9 @@ Period_name_list = ['Resting', 'Count1', 'Speak', 'Count2', 'Listen', 'Count3']
 sub_list = PTSDsub_list + HCsub_list
 roi_count_array = np.array([11, 10, 10, 5, 5, 3, 2, 2])
 
-feature_path = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\09FC'
+feature_path = r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\11FC_ROI'
 # data = pd.read_csv('../mean.csv', dtype=float)
-data = pd.read_csv('../FC.csv', dtype=float)
+data = pd.read_csv('../FC_ROI.csv', dtype=float)
 
 roicsv = pd.read_csv(r'C:\Users\wjy\OneDrive - hdu.edu.cn\研究生\大论文\fNIRS_Py\mni\roi.csv')
 roi_name_list = roicsv.columns.tolist()
@@ -82,16 +82,16 @@ def get_roi_data(roi_data, PTSDsub_list, HCsub_list, sub_no, roi_name, period_nu
 # 分通道分析
 def channel_group():
     # 分通道独立样本t检验和Mann-Whitney U 检验
-    group_result_array = np.zeros((3 * 1128 * 6, 7))
+    group_result_array = np.zeros((3 * 136 * 6, 7))
     group_result_header = "oxytype, channel_connnection, period, PTSD_test_pvalue, HC_test_pvalue, t_p_value, mannwhitneyu_p_value"
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
         # print('##### ' + oxy_label)
-        t_p_value_array = np.zeros((6, 1128))
-        mannwhitneyu_p_value_array = np.zeros((6, 1128))
+        t_p_value_array = np.zeros((6, 136))
+        mannwhitneyu_p_value_array = np.zeros((6, 136))
         for period_num in range(1, 7):
             print('##### ' + oxy_label+'_'+Period_name_list[period_num-1])
-            for connection_num in range(0, 1128):
+            for connection_num in range(0, 136):
                 HC = []
                 PTSD = []
                 for sub_no in PTSDsub_list:
@@ -130,13 +130,13 @@ def channel_group():
                         # plt.savefig(output_path + 'Channel ' + str(channel_num) + '_Period ' + str(period_num) + '_' + oxy_label + '.png')
                         # plt.close()
 
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 0] = oxy_num
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 1] = connection_num
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 2] = period_num
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 3] = PTSD_test_pvalue
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 4] = HC_test_pvalue
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 5] = t_p_value
-                group_result_array[(oxy_num - 1) * 1128 * 6 + connection_num * 6 + period_num - 1, 6] = mannwhitneyu_p_value
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 0] = oxy_num
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 1] = connection_num
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 2] = period_num
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 3] = PTSD_test_pvalue
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 4] = HC_test_pvalue
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 5] = t_p_value
+                group_result_array[(oxy_num - 1) * 136 * 6 + connection_num * 6 + period_num - 1, 6] = mannwhitneyu_p_value
 
     np.savetxt(feature_path + '\\' + 'result_group_channel.csv', group_result_array, delimiter=',',
                header=group_result_header, comments='', fmt='%.14f')
@@ -145,14 +145,14 @@ def channel_group():
 def channel_task():
     # 分通道配对t检验和Wilcoxon符号秩检验
     result_header = "oxytype, channel, period1, period2, PTSDperiod1_test_pvalue, PTSDperiod2_test_pvalue, PTSD_p_value, PTSD_mannwhitneyu_p_value, HCperiod1_test_pvalue, HCperiod2_test_pvalue, HC_p_value, HC_mannwhitneyu_p_value"
-    result_array = np.zeros((3 * 48 * 15, 12))
-    channel_sum_array = np.zeros((48, 3))
+    result_array = np.zeros((3 * 17 * 15, 12))
+    channel_sum_array = np.zeros((17, 3))
     period_sum_array = np.zeros((6, 3))
     oxy_sum_array = np.zeros((3, 3))
     for oxy_num in range(1, 4):
         oxy_label = oxy_list[oxy_num - 1]
         # print('##### ' + oxy_label)
-        for connection_num in range(0, 1128):
+        for connection_num in range(0, 136):
             pair_no = 0
             for period_num in range(1, 7):
                 for another_period_num in range(period_num, 7):
@@ -200,24 +200,24 @@ def channel_task():
                                         HC_p_value))
 
                         # print((oxy_num-1)*48*15+(channel_num-1)*15+pair_no)
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 0] = oxy_num
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 1] = channel_num
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 2] = period_num
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 3] = another_period_num
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 0] = oxy_num
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 1] = channel_num
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 2] = period_num
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 3] = another_period_num
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 4] = PTSDperiod1_test_pvalue
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 4] = PTSDperiod1_test_pvalue
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 5] = PTSDperiod2_test_pvalue
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 6] = PTSD_p_value
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 5] = PTSDperiod2_test_pvalue
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 6] = PTSD_p_value
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 7] = PTSD_mannwhitneyu_p_value
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 7] = PTSD_mannwhitneyu_p_value
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 8] = HCperiod1_test_pvalue
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 8] = HCperiod1_test_pvalue
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 9] = HCperiod2_test_pvalue
-                        result_array[(oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 10] = HC_p_value
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 9] = HCperiod2_test_pvalue
+                        result_array[(oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 10] = HC_p_value
                         result_array[
-                            (oxy_num - 1) * 48 * 15 + (channel_num - 1) * 15 + pair_no, 11] = HC_mannwhitneyu_p_value
+                            (oxy_num - 1) * 17 * 15 + (channel_num - 1) * 15 + pair_no, 11] = HC_mannwhitneyu_p_value
                         if PTSD_p_value < 0.05:
                             channel_sum_array[channel_num - 1, 0] = channel_sum_array[channel_num - 1, 0] + 1
                             period_sum_array[period_num - 1, 0] = period_sum_array[period_num - 1, 0] + 1
