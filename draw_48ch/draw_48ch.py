@@ -75,7 +75,7 @@ oxy_list = ['oxy', 'dxy', 'total']
 draw_sub = ["066"]
 
 # data = pd.read_csv('mean.csv', dtype=float)
-data = pd.read_csv('mean_chazhi.csv', dtype=float)
+data = pd.read_csv('../mean_chazhi.csv', dtype=float)
 for oxy_num in range(1, 4):
     oxy_label = oxy_list[oxy_num - 1]
     for sub_no in draw_sub:
@@ -99,25 +99,25 @@ for oxy_num in range(1, 4):
         for draw_num in range(0, 6):
             array = values[draw_num]
 
-            # 插值
-            for i in range(0, 5):
-                for j in range(0, 21):
-                    if np.isnan(array[i][j]):
-                        array[i][j] = avg_neighbors(array, (i, j))
-            # 定义插值函数
-            # interp = interp2d(np.arange(21), np.arange(5), data, kind='linear')
-            interp = interp2d(np.arange(21), np.arange(5), array, kind='cubic')
-            # 生成新的插值数据矩阵
-            new_data = interp(np.linspace(0, 20, 210), np.linspace(0, 4, 50))
-            # 绘制热力图
-            image = axs[draw_num // 3, draw_num % 3].imshow(new_data, cmap='jet', vmin=value_min, vmax=value_max)
-            axs[draw_num // 3, draw_num % 3].set_title(Period_name_list[draw_num])
-            axs[draw_num // 3, draw_num % 3].axis('off')
-
-            # # 不插值
-            # image = axs[draw_num // 3, draw_num % 3].imshow(array, cmap='jet', vmin=value_min, vmax=value_max)
+            # # 插值
+            # for i in range(0, 5):
+            #     for j in range(0, 21):
+            #         if np.isnan(array[i][j]):
+            #             array[i][j] = avg_neighbors(array, (i, j))
+            # # 定义插值函数
+            # # interp = interp2d(np.arange(21), np.arange(5), data, kind='linear')
+            # interp = interp2d(np.arange(21), np.arange(5), array, kind='cubic')
+            # # 生成新的插值数据矩阵
+            # new_data = interp(np.linspace(0, 20, 210), np.linspace(0, 4, 50))
+            # # 绘制热力图
+            # image = axs[draw_num // 3, draw_num % 3].imshow(new_data, cmap='jet', vmin=value_min, vmax=value_max)
             # axs[draw_num // 3, draw_num % 3].set_title(Period_name_list[draw_num])
             # axs[draw_num // 3, draw_num % 3].axis('off')
+
+            # 不插值
+            image = axs[draw_num // 3, draw_num % 3].imshow(array, cmap='jet', vmin=value_min, vmax=value_max)
+            axs[draw_num // 3, draw_num % 3].set_title(Period_name_list[draw_num])
+            axs[draw_num // 3, draw_num % 3].axis('off')
 
         fig.subplots_adjust(right=0.8)
         cbar_ax = fig.add_axes([0.9, 0.2, 0.03, 0.6])
